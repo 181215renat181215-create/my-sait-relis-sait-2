@@ -1,0 +1,628 @@
+<style>
+    body {
+        background-color: #1b2838;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        color: #c6d4df;
+        text-align: left;
+    }
+
+    /* ВЕРХНЯ ПАНЕЛЬ З ВКЛАДКАМИ */
+    .steam-header {
+        background-color: #171a21;
+        padding: 15px 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        margin-bottom: 30px;
+    }
+
+    .steam-nav {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 25px;
+        max-width: 940px;
+        margin: 0 auto;
+    }
+
+    .nav-btn {
+        background: none;
+        border: none;
+        color: #b8b6b4;
+        font-size: 15px;
+        font-weight: bold;
+        text-transform: uppercase;
+        cursor: pointer;
+        padding: 5px 10px;
+        transition: 0.2s;
+        border-bottom: 3px solid transparent;
+    }
+
+    .nav-btn:hover {
+        color: #ffffff;
+    }
+
+    .main-content {
+        max-width: 940px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .tab-content {
+        display: none;
+    }
+
+    h1 {
+        color: #ffffff;
+        font-size: 28px;
+        margin-bottom: 5px;
+    }
+
+    .subtitle {
+        color: #8f98a0;
+        font-size: 14px;
+        margin-bottom: 25px;
+    }
+
+    /* ДИЗАЙН КАРТОК */
+    .game-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        max-width: 650px;
+    }
+
+    .game-item {
+        background: linear-gradient(to right, #1f2d3d 0%, #16202d 100%);
+        padding: 15px 20px;
+        border-radius: 3px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        border-left: 4px solid #1a9fff;
+    }
+
+    .game-title {
+        font-size: 18px;
+        color: #ffffff;
+        font-weight: bold;
+    }
+
+    /* КНОПКИ */
+    .steam-btn {
+        padding: 8px 18px;
+        font-size: 14px;
+        font-weight: bold;
+        border: none;
+        border-radius: 2px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .btn-green {
+        background: linear-gradient(to right, #75b022 0%, #588a1b 100%);
+        color: #d2efff;
+    }
+
+    .btn-green:hover {
+        background: linear-gradient(to right, #8ed629 0%, #69a620 100%);
+        color: #ffffff;
+    }
+    
+    .btn-blue {
+        background: linear-gradient(to bottom, #214b6b 0%, #12283a 100%);
+        color: #66c0f4;
+        border: 1px solid #326891;
+    }
+
+    .btn-blue:hover {
+        background: linear-gradient(to bottom, #2f6b99 0%, #193852 100%);
+        color: #ffffff;
+    }
+
+    /* ДРУЗІ */
+    .friends-list {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        max-width: 400px;
+        background-color: #171a21;
+        padding: 20px;
+        border-radius: 4px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    }
+
+    .friend-item { display: flex; align-items: center; gap: 12px; }
+    .avatar {
+        width: 34px; height: 34px; background-color: #2a475e; border-radius: 3px;
+        display: flex; align-items: center; justify-content: center; font-weight: bold; color: #fff;
+    }
+
+    .friend-info { display: flex; flex-direction: column; }
+    .friend-name { font-size: 16px; font-weight: bold; }
+    .friend-status { font-size: 13px; }
+
+    .status-ingame .friend-name, .status-ingame .friend-status { color: #90ba3c; }
+    .status-ingame .avatar { border: 2px solid #90ba3c; }
+    
+    .status-online .friend-name, .status-online .friend-status { color: #57cbde; }
+    .status-online .avatar { border: 2px solid #57cbde; }
+</style>
+<div style="max-width: 948px; margin: 20px auto; padding: 24px; background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(103, 193, 245, 0.1); border-radius: 4px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); display: flex; align-items: center; gap: 20px; box-sizing: border-box;">
+    
+    <!-- Аватарка -->
+    <div style="width: 64px; height: 64px; background: linear-gradient(135deg, #3a6073, #3a7bd5); border-radius: 4px; border: 2px solid #67c1f5; box-shadow: 0 0 10px rgba(103, 193, 245, 0.4); flex-shrink: 0;"></div>
+    
+    <!-- Ім'я, кнопка та рівень -->
+    <div style="flex-grow: 1;">
+        <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+            <h1 style="color: #ffffff; font-size: 24px; font-weight: normal; margin: 0; font-family: sans-serif; letter-spacing: 0.5px;">ренат геймер</h1>
+            
+            <!-- РІВЕНЬ STEAM -->
+            <div style="display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border: 2px solid #4e819b; background: #243943; border-radius: 50%; color: #ffffff; font-size: 13px; font-weight: bold; font-family: sans-serif;" title="Рівень Steam">
+                50
+            </div>
+
+            <button style="background: rgba(255,255,255,0.1); color: #ffffff; border: none; padding: 5px 14px; font-size: 12px; border-radius: 2px; cursor: pointer; font-family: sans-serif; transition: 0.2s; height: 26px;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">
+                Редагувати профіль
+            </button>
+        </div>
+        <!-- Статус мережі -->
+        <div style="color: #57cbde; font-size: 13px; font-weight: bold; margin-top: 6px; font-family: sans-serif; letter-spacing: 0.5px;">• У мережі</div>
+    </div>
+    
+</div>
+<!-- 2. МОТОРЧИК ПЕРЕМИКАННЯ -->
+<script>
+    function openTab(tabId, element) {
+        var tabs = document.getElementsByClassName("tab-content");
+        for (var i = 0; i < tabs.length; i++) {
+            tabs[i].style.display = "none";
+        }
+        var buttons = document.getElementsByClassName("nav-btn");
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].style.borderBottom = "3px solid transparent";
+            buttons[i].style.color = "#b8b6b4";
+        }
+        document.getElementById(tabId).style.display = "block";
+        element.style.borderBottom = "3px solid #1a9fff";
+        element.style.color = "#1a9fff";
+    }
+</script>
+
+<!-- 3. ГОЛОВНЕ МЕНЮ -->
+<header class="steam-header">
+    <ul class="steam-nav">
+        <li><button class="nav-btn" style="color:#1a9fff; border-bottom:3px solid #1a9fff;" onclick="openTab('store', this)">Крамниця</button></li>
+        <li><button class="nav-btn" onclick="openTab('library', this)">Бібліотека</button></li>
+        <li><button class="nav-btn" onclick="openTab('friends', this)">Друзі</button></li>
+    </ul>
+</header>
+
+<!-- 4. НАПОВНЕННЯ СТОРІНОК -->
+<main class="main-content">
+
+    <!-- ВКЛАДКА 1: КРАМНИЦЯ -->
+    <div id="store" class="tab-content" style="display: block;">
+        <h1>Крамниця Steam</h1>
+        <p class="subtitle">Нові та популярні ігри для купівлі:</p>
+        
+        <div class="game-list">
+            <div class="game-item"><span class="game-title">Cyberpunk 2077</span><button class="steam-btn btn-green" onclick="alert('Куплено Cyberpunk 2077!')">Купити — 499 ₴</button></div>
+            <div class="game-item"><span class="game-title">Red Dead Redemption 1</span><button class="steam-btn btn-green" onclick="alert('Куплено RDR 1!')">Купити — 999 ₴</button></div>
+            <div class="game-item"><span class="game-title">Red Dead Redemption 2</span><button class="steam-btn btn-green" onclick="alert('Куплено RDR 2!')">Купити — 1499 ₴</button></div>
+            <div class="game-item"><span class="game-title">Dota 2</span><button class="steam-btn btn-green" onclick="alert('Додано Dota 2!')">Безкоштовно</button></div>
+            <div class="game-item"><span class="game-title">Counter-Strike 2</span><button class="steam-btn btn-green" onclick="alert('Додано CS 2!')">Безкоштовно</button></div>
+            <div class="game-item"><span class="game-title">Battlefield 3</span><button class="steam-btn btn-green" onclick="alert('Куплено Battlefield 3!')">Купити — 199 ₴</button></div>
+            <div class="game-item"><span class="game-title">Battlefield 4</span><button class="steam-btn btn-green" onclick="alert('Куплено Battlefield 4!')">Купити — 299 ₴</button></div>
+            <div class="game-item"><span class="game-title">Battlefield V</span><button class="steam-btn btn-green" onclick="alert('Куплено Battlefield V!')">Купити — 499 ₴</button></div>
+            <div class="game-item"><span class="game-title">Battlefield 2042</span><button class="steam-btn btn-green" onclick="alert('Куплено Battlefield 2042!')">Купити — 699 ₴</button></div>
+            <div class="game-item"><span class="game-title">Battlefield 6</span><button class="steam-btn btn-green" onclick="alert('Передзамовлено Battlefield 6!')">Купити — 1999 ₴</button></div>
+            <div class="game-item"><span class="game-title">God of War Ragnarök</span><button class="steam-btn btn-green" onclick="alert('Куплено God of War Ragnarök!')">Купити — 1199 ₴</button></div>
+            <div class="game-item"><span class="game-title">Mortal Kombat 1</span><button class="steam-btn btn-green" onclick="alert('Куплено Mortal Kombat 1!')">Купити — 358 ₴</button></div>
+        </div>
+    </div>
+
+    <!-- ВКЛАДКА 2: БІБЛІОТЕКА -->
+    <div id="library" class="tab-content">
+        <h1>Моя Бібліотека</h1>
+        <p class="subtitle">Ваші ігри, готові до запуску:</p>
+        
+        <div class="game-list">
+            <div class="game-item"><span class="game-title">God of War (2018)</span><button class="steam-btn btn-blue" onclick="alert('Запуск God of War...')">Грати</button></div>
+            <div class="game-item"><span class="game-title">Battlefield 1</span><button class="steam-btn btn-blue" onclick="alert('Запуск Battlefield 1...')">Грати</button></div>
+            <div class="game-item"><span class="game-title">Nead For Spead Heart</span><button class="steam-btn btn-blue" onclick="alert('Запуск Smite 1...')">Грати</button></div>
+            <div class="game-item"><span class="game-title">Smite 2</span><button class="steam-btn btn-blue" onclick="alert('Запуск Smite 2...')">Gradу</button></div>
+            <div class="game-item"><span class="game-title">Resident Evil 9</span><button class="steam-btn btn-blue" onclick="alert('Запуск Resident Evil 1...')">Грати</button></div>
+            <div class="game-item"><span class="game-title">Resident Evil 2</span><button class="steam-btn btn-blue" onclick="alert('Запуск Resident Evil 2...')">Грати</button></div>
+            <div class="game-item"><span class="game-title">Resident Evil 3</span><button class="steam-btn btn-blue" onclick="alert('Запуск Resident Evil 3...')">Грати</button></div>
+            <div class="game-item"><span class="game-title">Resident Evil 4</span><button class="steam-btn btn-blue" onclick="alert('Запуск Resident Evil 4...')">Грати</button></div>
+            <div class="game-item"><span class="game-title">GTA 3</span><button class="steam-btn btn-blue" onclick="alert('Запуск GTA 3...')">Грати</button></div>
+            <div class="game-item"><span class="game-title">GTA 4</span><button class="steam-btn btn-blue" onclick="alert('Запуск GTA 4...')">Грати</button></div>
+            <div class="game-item"><span class="game-title">GTA 5</span><button class="steam-btn btn-blue" onclick="alert('Запуск GTA 5...')">Грати</button></div>
+        </div>
+    </div>
+
+    <!-- ВКЛАДКА 3: ДРУЗІ -->
+    <div id="friends" class="tab-content">
+        <h1>Список друзів</h1>
+        <p class="subtitle">Ваші друзі в мережі:</p>
+        
+        <div class="friends-list">
+            <div class="friend-item status-ingame">
+                <div class="avatar">N</div>
+                <div class="friend-info"><span class="friend-name">Neo_UA</span><span class="friend-status">Грає в GTA 3</span></div>
+            </div>
+            <div class="friend-item status-online">
+                <div class="avatar">K</div>
+                <div class="friend-info"><span class="friend-name">Kirill_Pro</span><span class="friend-status">В мережі</span></div>
+            </div>
+            <div class="friend-item status-ingame">
+                <div class="avatar">G</div>
+                <div class="friend-info"><span class="friend-name">GamerX</span><span class="friend-status">Грає в Battlefield 2042</span></div>
+            </div>
+            <div class="friend-item status-ingame">
+                <div class="avatar">b</div>
+                <div class="friend-info"><span class="friend-name">bajus</span><span class="friend-status">Грає в Battlefield 6</span></div>
+            </div>
+            <div class="friend-item status-ingame">
+                <div class="avatar">s</div>
+                <div class="friend-info"><span class="friend-name">stalker</span><span class="friend-status">Грає в Stalker 2 Heart Of Chornobelt</span></div>
+            </div>
+            <div class="friend-item status-ingame">
+                <div class="avatar">G</div>
+                <div class="friend-info"><span class="friend-name">Grif</span><span class="friend-status">Грає в Battlefield 1</span></div>
+            </div>
+        </div>
+    </div>
+<div style="margin-top: 40px; padding: 20px; background: rgba(0, 0, 0, 0.4); border-radius: 4px; border: 1px solid rgba(103, 193, 245, 0.1);">
+    
+    <h2 style="color: #ffffff; font-size: 20px; font-weight: normal; margin-top: 0; margin-bottom: 20px; border-bottom: 1px solid rgba(103, 193, 245, 0.2); padding-bottom: 10px;">
+        Прогрес досягнень🎖
+    </h2>
+    
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+        
+        <!-- Игры с платиной (100%) -->
+        <div style="background: linear-gradient(135deg, rgba(42, 71, 94, 0.2) 0%, rgba(223, 163, 44, 0.05) 100%); border: 1px solid rgba(223, 163, 44, 0.4); padding: 12px; border-radius: 4px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <span style="color: #ffffff; font-weight: bold; font-size: 15px;">God of War (2018)</span>
+                <span style="color: #dfa32c; font-size: 11px; font-weight: bold; background: rgba(223, 163, 44, 0.1); padding: 2px 6px; border-radius: 2px; border: 1px solid rgba(223, 163, 44, 0.3);">ІДЕАЛЬНА ГРА (ПЛАТИНА)</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div style="background: #000000; height: 6px; flex-grow: 1; border-radius: 2px; overflow: hidden; padding: 1px;">
+                    <div style="background: linear-gradient(to right, #b8860b 0%, #dfa32c 100%); height: 100%; width: 100%;"></div>
+                </div>
+                <span style="color: #dfa32c; font-size: 12px; font-weight: bold; min-width: 45px; text-align: right;">37 / 37</span>
+            </div>
+        </div>
+
+        <div style="background: linear-gradient(135deg, rgba(42, 71, 94, 0.2) 0%, rgba(223, 163, 44, 0.05) 100%); border: 1px solid rgba(223, 163, 44, 0.4); padding: 12px; border-radius: 4px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <span style="color: #ffffff; font-weight: bold; font-size: 15px;">Battlefield 1</span>
+                <span style="color: #dfa32c; font-size: 11px; font-weight: bold; background: rgba(223, 163, 44, 0.1); padding: 2px 6px; border-radius: 2px; border: 1px solid rgba(223, 163, 44, 0.3);">ІДЕАЛЬНА ГРА (ПЛАТИНА)</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div style="background: #000000; height: 6px; flex-grow: 1; border-radius: 2px; overflow: hidden; padding: 1px;">
+                    <div style="background: linear-gradient(to right, #b8860b 0%, #dfa32c 100%); height: 100%; width: 100%;"></div>
+                </div>
+                <span style="color: #dfa32c; font-size: 12px; font-weight: bold; min-width: 45px; text-align: right;">50 / 50</span>
+            </div>
+        </div>
+
+        <div style="background: linear-gradient(135deg, rgba(42, 71, 94, 0.2) 0%, rgba(223, 163, 44, 0.05) 100%); border: 1px solid rgba(223, 163, 44, 0.4); padding: 12px; border-radius: 4px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <span style="color: #ffffff; font-weight: bold; font-size: 15px;">Smite 2</span>
+                <span style="color: #dfa32c; font-size: 11px; font-weight: bold; background: rgba(223, 163, 44, 0.1); padding: 2px 6px; border-radius: 2px; border: 1px solid rgba(223, 163, 44, 0.3);">ІДЕАЛЬНА ГРА (ПЛАТИНА)</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div style="background: #000000; height: 6px; flex-grow: 1; border-radius: 2px; overflow: hidden; padding: 1px;">
+                    <div style="background: linear-gradient(to right, #b8860b 0%, #dfa32c 100%); height: 100%; width: 100%;"></div>
+                </div>
+                <span style="color: #dfa32c; font-size: 12px; font-weight: bold; min-width: 45px; text-align: right;">25 / 25</span>
+            </div>
+            <div style="background: linear-gradient(135deg, rgba(42, 71, 94, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%); border: 1px solid rgba(103, 193, 245, 0.2); padding: 10px; margin-bottom: 10px;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <span style="color: #ffffff; font-weight: bold; font-size: 15px;">Grand Theft Auto V 💰</span>
+        <span style="color: #dfa32c; font-size: 11px; font-weight: bold;">100% ДОСЯГНЕНЬ</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 15px; margin-top: 5px;">
+        <div style="background: #000000; height: 6px; flex-grow: 1; border-radius: 3px;">
+            <!-- Золота смуга заповнена на 100% -->
+            <div style="background: linear-gradient(to right, #b8860b 0%, #dfa32c 100%); height: 6px; width: 100%; border-radius: 3px;"></div>
+        </div>
+        <span style="color: #dfa32c; font-size: 12px; font-weight: bold; min-width: 30px;">77/77</span>
+    </div>
+    <div style="background: linear-gradient(135deg, rgba(42, 71, 94, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%); border: 1px solid rgba(103, 193, 245, 0.2); padding: 10px; margin-bottom: 10px;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <span style="color: #ffffff; font-weight: bold; font-size: 15px;">Need for Speed Heat 🏎️</span>
+        <span style="color: #dfa32c; font-size: 11px; font-weight: bold;">МАКС. РЕПУТАЦІЯ</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 15px; margin-top: 5px;">
+        <div style="background: #000000; height: 6px; flex-grow: 1; border-radius: 3px;">
+            <!-- Золота смуга заповнена на 100% -->
+            <div style="background: linear-gradient(to right, #b8860b 0%, #dfa32c 100%); height: 6px; width: 100%; border-radius: 3px;"></div>
+        </div>
+        <span style="color: #dfa32c; font-size: 12px; font-weight: bold; min-width: 30px;">50/50</span>
+    </div>
+</div>
+        </div>
+
+        <!-- Обычные игры со шкалой прогресса -->
+        <div style="background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(103, 193, 245, 0.1); padding: 12px; border-radius: 4px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <span style="color: #ffffff; font-weight: bold; font-size: 15px;">Resident Evil 9</span>
+                <span style="color: #67c1f5; font-size: 12px;">Сині досягнення</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div style="background: #000000; height: 6px; flex-grow: 1; border-radius: 2px; overflow: hidden; padding: 1px;">
+                    <div style="background: linear-gradient(to right, #2a475e 0%, #4784a6 100%); height: 100%; width: 45%;"></div>
+                </div>
+                <span style="color: #8f98a0; font-size: 12px; min-width: 45px; text-align: right;">21</span>
+            </div>
+        </div>
+
+        <div style="background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(103, 193, 245, 0.1); padding: 12px; border-radius: 4px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <span style="color: #ffffff; font-weight: bold; font-size: 15px;">Resident Evil 2</span>
+                <span style="color: #67c1f5; font-size: 12px;">Сині досягнення</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div style="background: #000000; height: 6px; flex-grow: 1; border-radius: 2px; overflow: hidden; padding: 1px;">
+                    <div style="background: linear-gradient(to right, #2a475e 0%, #4784a6 100%); height: 100%; width: 70%;"></div>
+                </div>
+                <span style="color: #8f98a0; font-size: 12px; min-width: 45px; text-align: right;">34</span>
+            </div>
+        </div>
+
+        <div style="background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(103, 193, 245, 0.1); padding: 12px; border-radius: 4px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <span style="color: #ffffff; font-weight: bold; font-size: 15px;">Resident Evil 3</span>
+                <span style="color: #67c1f5; font-size: 12px;">Сині досягнення</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div style="background: #000000; height: 6px; flex-grow: 1; border-radius: 2px; overflow: hidden; padding: 1px;">
+                    <div style="background: linear-gradient(to right, #2a475e 0%, #4784a6 100%); height: 100%; width: 35%;"></div>
+                </div>
+                <span style="color: #8f98a0; font-size: 12px; min-width: 45px; text-align: right;">19</span>
+            </div>
+        </div>
+
+        <div style="background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(103, 193, 245, 0.1); padding: 12px; border-radius: 4px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <span style="color: #ffffff; font-weight: bold; font-size: 15px;">Resident Evil 4</span>
+                <span style="color: #67c1f5; font-size: 12px;">Сині досягнення</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div style="background: #000000; height: 6px; flex-grow: 1; border-radius: 2px; overflow: hidden; padding: 1px;">
+                    <div style="background: linear-gradient(to right, #2a475e 0%, #4784a6 100%); height: 100%; width: 60%;"></div>
+                </div>
+                <span style="color: #8f98a0; font-size: 12px; min-width: 45px; text-align: right;">32</span>
+            </div>
+        </div>
+
+        <div style="background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(103, 193, 245, 0.1); padding: 12px; border-radius: 4px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <span style="color: #ffffff; font-weight: bold; font-size: 15px;">GTA 3</span>
+                <span style="color: #67c1f5; font-size: 12px;">Сині досягнення</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div style="background: #000000; height: 6px; flex-grow: 1; border-radius: 2px; overflow: hidden; padding: 1px;">
+                    <div style="background: linear-gradient(to right, #2a475e 0%, #4784a6 100%); height: 100%; width: 50%;"></div>
+                </div>
+                <span style="color: #8f98a0; font-size: 12px; min-width: 45px; text-align: right;">27</span>
+            </div>
+        </div>
+
+        <div style="background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(103, 193, 245, 0.1); padding: 12px; border-radius: 4px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <span style="color: #ffffff; font-weight: bold; font-size: 15px;">GTA 4</span>
+                <span style="color: #67c1f5; font-size: 12px;">Сині досягнення</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div style="background: #000000; height: 6px; flex-grow: 1; border-radius: 2px; overflow: hidden; padding: 1px;">
+                    <div style="background: linear-gradient(to right, #2a475e 0%, #4784a6 100%); height: 100%; width: 25%;"></div>
+                </div>
+                <span style="color: #8f98a0; font-size: 12px; min-width: 45px; text-align: right;">19</span>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div style="background: rgba(23, 26, 33, 0.95); padding: 30px; border-radius: 8px; text-align: center; margin: 20px auto; max-width: 1000px; border: 2px solid #ff5722; box-shadow: 0 0 25px rgba(230, 126, 34, 0.8); font-family: Arial, sans-serif; color: #ffffff;">
+    
+    <!-- Назва крамниці -->
+    <h1 style="color: #ff9f43; margin: 0 0 10px 0; font-size: 28px; text-shadow: 3px 3px #000; text-transform: uppercase;">
+        🌌 КРАМНИЦЯ ЖЕТОНІВ  🌌
+    </h1>
+    
+    <!-- Офіційний баланс за ігрові досягнення та платину -->
+    <div style="background-color: rgba(0, 0, 0, 0.6); display: inline-block; padding: 10px 20px; border-radius: 20px; color: #ffcc00; font-weight: bold; font-size: 18px; border: 1px solid #ffcc00; margin-bottom: 25px;">
+        🪙 Баланс: 50,000 Жетонів (За Абсолютну Платину!) 🔥
+    </div>
+
+    <!-- Список ігрових товарів, рамок та фонів -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
+        
+        <!-- Товар 1 -->
+        <div style="background-color: rgba(23, 26, 33, 0.85); border: 2px solid #e67e22; border-radius: 8px; padding: 20px; text-align: center;">
+            <div style="font-size: 50px; margin-bottom: 15px;">👑</div>
+            <div style="font-size: 18px; color: #ffffff; font-weight: bold; margin-bottom: 10px;">Золота Корона Кото-Кратоса</div>
+            <div style="color: #ff9f43; font-weight: bold; margin-bottom: 15px;">🪙 5,000 жетонів</div>
+            <button style="background: linear-gradient(to right, #ff5722, #d35400); color: #ffffff; border: none; padding: 10px 20px; font-weight: bold; border-radius: 3px; cursor: pointer; width: 100%; text-transform: uppercase;">Придбати</button>
+        </div>
+
+        <!-- Товар 2 -->
+        <div style="background-color: rgba(23, 26, 33, 0.85); border: 2px solid #e67e22; border-radius: 8px; padding: 20px; text-align: center;">
+            <div style="font-size: 50px; margin-bottom: 15px;">💀</div>
+            <div style="font-size: 18px; color: #ffffff; font-weight: bold; margin-bottom: 10px;">Рамка "Елітні Черепки Ніфльгейму"</div>
+            <div style="color: #ff9f43; font-weight: bold; margin-bottom: 15px;">🪙 7,500 жетонів</div>
+            <button style="background: linear-gradient(to right, #ff5722, #d35400); color: #ffffff; border: none; padding: 10px 20px; font-weight: bold; border-radius: 3px; cursor: pointer; width: 100%; text-transform: uppercase;">Придбати</button>
+        </div>
+
+        <!-- Товар 3 -->
+        <div style="background-color: rgba(23, 26, 33, 0.85); border: 2px solid #e67e22; border-radius: 8px; padding: 20px; text-align: center;">
+            <div style="font-size: 50px; margin-bottom: 15px;">🎖️</div>
+            <div style="font-size: 18px; color: #ffffff; font-weight: bold; margin-bottom: 10px;">Рамка Медика 8-го Рівня (BF1)</div>
+            <div style="color: #ff9f43; font-weight: bold; margin-bottom: 15px;">🪙 4,500 жетонів</div>
+            <button style="background: linear-gradient(to right, #ff5722, #d35400); color: #ffffff; border: none; padding: 10px 20px; font-weight: bold; border-radius: 3px; cursor: pointer; width: 100%; text-transform: uppercase;">Придбати</button>
+        </div>
+
+        <!-- Товар 4 -->
+        <div style="background-color: rgba(23, 26, 33, 0.85); border: 2px solid #e67e22; border-radius: 8px; padding: 20px; text-align: center;">
+            <div style="font-size: 50px; margin-bottom: 15px;">🔥</div>
+            <div style="font-size: 18px; color: #ffffff; font-weight: bold; margin-bottom: 10px;">Анімований Фон "Клинки Хаосу"</div>
+            <div style="color: #ff9f43; font-weight: bold; margin-bottom: 15px;">🪙 10,000 жетонів</div>
+            <button style="background: linear-gradient(to right, #ff5722, #d35400); color: #ffffff; border: none; padding: 10px 20px; font-weight: bold; border-radius: 3px; cursor: pointer; width: 100%; text-transform: uppercase;">Придбати</button>
+        </div>
+         <!-- Товар 5 -->
+        <div style="background-color: rgba(23, 26, 33, 0.85); border: 2px solid #e67e22; border-radius: 8px; padding: 20px; text-align: center;">
+            <div style="font-size: 50px; margin-bottom: 15px;">($)</div>
+            <div style="font-size: 18px; color: #ffffff; font-weight: bold; margin-bottom: 10px;">облігації з Battlefield 1"</div>
+            <div style="color: #ff9f43; font-weight: bold; margin-bottom: 15px;">🪙 10, жетонів</div>
+            <button style="background: linear-gradient(to right, #ff5722, #d35400); color: #ffffff; border: none; padding: 10px 20px; font-weight: bold; border-radius: 3px; cursor: pointer; width: 100%; text-transform: uppercase;">Придбати</button>
+        </div>
+        <div style="background-color: rgba(23, 26, 33, 0.85); border: 2px solid #e67e22; border-radius: 8px; padding: 20px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+    <div style="font-size: 45px; margin-bottom: 10px;">🪖</div>
+    <div style="font-size: 16px; color: #ffffff; font-weight: bold; margin-bottom: 8px; min-height: 40px;">Ротація та Оновлення серверів Battlefield 1</div>
+    <div style="color: #ff9f43; font-weight: bold; margin-bottom: 12px; font-size: 14px;">🪙 3,000 жетонів</div>
+    <button style="background: linear-gradient(to right, #ff5722, #d35400); color: #ffffff; border: none; padding: 10px 20px; font-weight: bold; border-radius: 4px; cursor: pointer; width: 100%; text-transform: uppercase; font-size: 12px;">Придбати</button>
+</div>
+    <div style="background-color: rgba(23, 26, 33, 0.85); border: 2px solid #e67e22; border-radius: 8px; padding: 20px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+    <div style="font-size: 45px; margin-bottom: 10px;">⚡</div>
+    <div style="font-size: 16px; color: #ffffff; font-weight: bold; margin-bottom: 8px; min-height: 40px;">Секретні новини тактики God of War Рагнарок</div>
+    <div style="color: #ff9f43; font-weight: bold; margin-bottom: 12px; font-size: 14px;">🪙 6,000 жетонів</div>
+    <button style="background: linear-gradient(to right, #ff5722, #d35400); color: #ffffff; border: none; padding: 10px 20px; font-weight: bold; border-radius: 4px; cursor: pointer; width: 100%; text-transform: uppercase; font-size: 12px;">Придбати</button>
+</div>
+        <!-- КАРТКА АВТОМАТА ФЕДОРОВА (233 КІЛА) — ІДЕАЛЬНО БЕЗ ПОМИЛОК -->
+<div style="background-color: rgba(23, 26, 33, 0.85); border: 2px solid #e67e22; border-radius: 8px; padding: 20px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.3); font-family: Arial, sans-serif;">
+    <div style="font-size: 45px; margin-bottom: 10px;">🔫</div>
+    <div style="font-size: 16px; color: #ffffff; font-weight: bold; margin-bottom: 8px; min-height: 40px;">Автомат Федорова (233 Кіла)</div>
+    <div style="color: #dfa32c; font-weight: bold; margin-bottom: 12px; font-size: 13px;">🌟 Оновлення: 67 кілів до 3-ї зірки!</div>
+    <button style="background: linear-gradient(to right, #ff5722, #d35400); color: #ffffff; border: none; padding: 10px 20px; font-weight: bold; border-radius: 4px; cursor: pointer; width: 100%; text-transform: uppercase; font-size: 12px;">Придбати Оружку</button>
+</div>
+    </div>
+        <div class="secret-token-item" style="text-align: center; margin: 30px auto; padding: 20px; background: rgba(255, 0, 0, 0.1); border: 2px dashed #ff0000; border-radius: 10px; max-width: 400px;">
+    <p style="color: #ff8c00; font-weight: bold; margin-bottom: 10px;">🎁 СЕКРЕТНИЙ ЛОТ: БЕЗКОШТОВНО (0 ЖЕТОНІВ)</p>
+    <button onclick="shopTrapActivated()" class="scary-shop-btn">
+        🔥 НЕ НАТИСКАТИ УЧНЯМ! 🔥
+    </button>
+</div>
+
+<style>
+    /* Неоновий вигляд вогняної кнопки для крамниці */
+    .scary-shop-btn {
+        background: linear-gradient(45deg, #ff0000, #8b0000);
+        color: #ffffff;
+        font-size: 20px;
+        font-weight: bold;
+        padding: 15px 30px;
+        border: 2px solid #ffffff;
+        border-radius: 10px;
+        cursor: pointer;
+        box-shadow: 0 0 15px #ff0000;
+        transition: 0.3s ease-in-out;
+        text-shadow: 2px 2px 4px #000;
+    }
+
+    .scary-shop-btn:hover {
+        transform: scale(1.08) rotate(1deg);
+        background: linear-gradient(45deg, #ff4500, #ff0000);
+        box-shadow: 0 0 30px #ff4500;
+    }
+</style>
+
+<script>
+function shopTrapActivated() {
+    // Жорсткий пранк починається!
+    alert("🚨 СИСТЕМНА ПОМИЛКА КРАМНИЦІ ЖЕТОНІВ!");
+    alert("😼 Кото-Кратос помітив, що хтось хотів халяви!");
+    alert("🥷 Ренат Геймер запускає БРУТАЛІТІ на 396 урону!");
+
+    // Перетворюємо крамницю на кабінет Бога Надії
+    document.body.style.background = "#050505";
+    document.body.innerHTML = `
+        <div style="text-align:center; padding-top:15vh; font-family:sans-serif; color:white; background:#050505; height:100vh; width:100vw; position:fixed; top:0; left:0; z-index:9999;">
+            <h1 style="color:#ff4500; font-size:45px; text-shadow: 0 0 20px red;">
+                💥 ТЕБЕ ЗЛАМАНО УЧЕНЬ! 💥
+            </h1>
+            <p style="font-size:24px; color:#ff8c00;">Тут править Перший Король Абсолютної Платини — РЕНАТ! 👑</p>
+            <p style="font-size:18px; color:#888;">Всі твої жетони конфісковано Ангелом Смерті з Battlefield 1... 🪖</p>
+            <div style="font-size:80px; margin-top:30px; animation: spin 2s linear infinite;">😼👑🪓</div>
+            <br><br>
+            <button onclick="location.reload()" style="background:#ff4500; color:#fff; padding:15px 30px; font-size:18px; font-weight:bold; border:none; border-radius:5px; cursor:pointer; box-shadow: 0 0 15px red;">
+                Благати про пощаду (Повернутися в Крамницю)
+            </button>
+        </div>
+    `;
+}
+</script>
+    </div>
+</div>
+</div>
+<!-- СЕКЦІЯ: СПИСОК БАЖАНОГО РЕНАТА ЛЕГЕНДИ (БЕЗ ПОМИЛОК) -->
+<div style="background: rgba(23, 26, 33, 0.95); padding: 30px; border-radius: 8px; text-align: center; margin: 30px auto; max-width: 900px; border: 2px solid #ff5722; box-shadow: 0 0 25px rgba(230, 126, 34, 0.7); font-family: Arial, sans-serif; color: #ffffff;">
+    
+    <!-- Назва нової секції -->
+    <h2 style="color: #ff9f43; margin: 0 0 10px 0; font-size: 26px; text-shadow: 2px 2px #000; text-transform: uppercase; letter-spacing: 1px;">
+        📌 СПИСОК БАЖАНОГО (WISHLIST) 📌
+    </h2>
+    
+    <p style="color: #b8b6b4; font-size: 14px; margin-bottom: 25px; font-style: italic;">
+        Ігри, які Ренат Геймер 50-го рівня планує загарбати найближчим часом!
+    </p>
+
+    <!-- Список бажаних ігор -->
+    <div style="display: flex; flex-direction: column; gap: 15px; text-align: left;">
+        
+        <!-- Гра 1: Рагнарок -->
+        <div style="background-color: #121e2c; border: 1px solid #e67e22; border-radius: 6px; padding: 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 6px rgba(0,0,0,0.2);">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <span style="font-size: 30px;">🏔️</span>
+                <div>
+                    <div style="font-size: 18px; font-weight: bold; color: #ffffff;">God of War Ragnarök</div>
+                    <div style="font-size: 12px; color: #66c0f4;">Додано: Серпень 2026</div>
+                </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <span style="color: #ff9f43; font-weight: bold;">1199 грн</span>
+                <button style="background: linear-gradient(to right, #ff5722, #d35400); color: #ffffff; border: none; padding: 8px 15px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 12px;">До кошика</button>
+            </div>
+        </div>
+
+        <!-- Гра 2: Сталкер 2 -->
+        <div style="background-color: #121e2c; border: 1px solid #e67e22; border-radius: 6px; padding: 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 6px rgba(0,0,0,0.2);">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <span style="font-size: 30px;">☢️</span>
+                <div>
+                    <div style="font-size: 18px; font-weight: bold; color: #ffffff;">S.T.A.L.K.E.R. 2: Heart of Chornobyl</div>
+                    <div style="font-size: 12px; color: #66c0f4;">Чекає на реліз під кабаноси</div>
+                </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <span style="color: #ff9f43; font-weight: bold;">899 грн</span>
+                <button style="background: linear-gradient(to right, #ff5722, #d35400); color: #ffffff; border: none; padding: 8px 15px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 12px;">До кошика</button>
+            </div>
+        </div>
+
+        <!-- Гра 3: МК1 -->
+        <div style="background-color: #121e2c; border: 1px solid #e67e22; border-radius: 6px; padding: 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 6px rgba(0,0,0,0.2);">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <span style="font-size: 30px;">🥷</span>
+                <div>
+                    <div style="font-size: 18px; font-weight: bold; color: #ffffff;">Mortal Kombat 1 (Premium Edition)</div>
+                    <div style="font-size: 12px; color: #66c0f4;">Для комбо на 465 урону</div>
+                </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <span style="color: #ff9f43; font-weight: bold;">1599 грн</span>
+                <button style="background: linear-gradient(to right, #ff5722, #d35400); color: #ffffff; border: none; padding: 8px 15px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 12px;">До кошика</button>
+            </div>
+            
+        </div>
+
+    </div>
+</div>
+</main>
